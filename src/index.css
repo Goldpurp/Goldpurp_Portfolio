@@ -1,0 +1,116 @@
+@import "tailwindcss";
+
+/* ── Dark mode via class strategy ── */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ── Map CSS variables into Tailwind's color system ── */
+@theme {
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --color-surface: var(--bg-app);
+  --color-card: var(--bg-card);
+  --color-elevated: var(--bg-card-hover);
+  --color-pill: var(--bg-pill);
+  --color-primary: var(--brand);
+  --color-foreground: var(--text-main);
+  --color-muted: var(--text-muted);
+  --color-line: var(--border);
+}
+
+/* ── Light Mode (default) ── */
+:root {
+  --bg-app: #f3f6f5;
+  --bg-card: rgba(255, 255, 255, 0.88);
+  --bg-card-hover: rgba(255, 255, 255, 0.96);
+  --bg-pill: #e6eeec;
+  --input-bg: rgba(230, 238, 236, 0.6);
+
+  --text-main: #002c25;
+  --text-muted: #4e6561;
+
+  --brand: #00473e;
+  --brand-hover: #00332c;
+  --accent: #dca11d;
+
+  --border: rgba(0, 71, 62, 0.1);
+  --glow: rgba(0, 71, 62, 0.15);
+
+  --scrollbar-track: #f3f6f5;
+  --scrollbar-thumb: #c1ccc9;
+  --scrollbar-thumb-hover: #00473e;
+}
+
+/* ── Dark Mode ── */
+.dark {
+  --bg-app: #030706;
+  --bg-card: rgba(10, 16, 15, 0.88);
+  --bg-card-hover: rgba(14, 22, 21, 0.96);
+  --bg-pill: rgba(0, 71, 62, 0.22);
+  --input-bg: rgba(0, 0, 0, 0.45);
+
+  --text-main: #f0f4f3;
+  --text-muted: #7d9490;
+
+  --brand: #14b8a6;
+  --brand-hover: #2dd4bf;
+  --accent: #e2a524;
+
+  --border: rgba(255, 255, 255, 0.06);
+  --glow: rgba(20, 184, 166, 0.22);
+
+  --scrollbar-track: #030706;
+  --scrollbar-thumb: #1a2b28;
+  --scrollbar-thumb-hover: #14b8a6;
+}
+
+/* ── Base ── */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-app);
+  color: var(--text-main);
+  transition: background-color 0.35s ease, color 0.35s ease;
+  overflow-x: hidden;
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--scrollbar-track);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: 4px;
+  border: 2px solid var(--scrollbar-track);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-thumb-hover);
+}
+
+/* ── Utilities ── */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Focus ring for inputs */
+input:focus,
+textarea:focus {
+  border-color: var(--brand) !important;
+  box-shadow: 0 0 0 3px var(--glow);
+  outline: none;
+}
+
+/* Selection */
+::selection {
+  background: var(--brand);
+  color: #fff;
+}
